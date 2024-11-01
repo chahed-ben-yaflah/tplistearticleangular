@@ -1,0 +1,38 @@
+
+<h2>{{title}}</h2>
+
+<button class="btn btn-success mb-3"(click)="changeAction('add')">Ajouter un article</button>
+
+@if (action== "add")
+ {<app-add-article [lastId]="Articles[Articles.length- 1].id"
+ (articleCreated)="addArticle($event)"
+ ></app-add-article>}
+
+<table class="table">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">titre</th>
+        <th scope="col">photo</th>
+        <th scope="col">date</th>
+        <th scope="col">description</th>
+        <th scope="col">score</th>
+        <th scope="col"> incrémenter score</th>
+        <th scope="col"> décrèmenter score</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      @for (article of Articles; track $index) {
+      <tr>
+        <th scope="row">{{article.id}}</th>
+        <td>{{article.title}}</td>
+        <td>{{article.photo}}</td>
+        <td>{{article.date}}</td>
+        <td>{{article.description}}</td>
+        <td>{{article.score}}</td>
+        <td><button class="btn btn-primary" (click)="voteUp(article)">up</button></td>
+        <td><button class="btn btn-danger"(click)="voteDown(article)">down</button></td>
+      </tr>
+    }
+
